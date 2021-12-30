@@ -133,7 +133,7 @@ public class KinematicObject : MonoBehaviour
                     velocity.y = Mathf.Min(velocity.y, 0);
                 }
 
-                var modifiedDistance = hitBuffer[i].distance - shellRadius;
+                var modifiedDistance = hitBufferList[i].distance - shellRadius;
                 distance = modifiedDistance < distance ? modifiedDistance : distance;
             }
         }

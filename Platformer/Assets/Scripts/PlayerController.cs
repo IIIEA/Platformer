@@ -37,8 +37,11 @@ public class PlayerController : KinematicObject
         if (controlEnabled)
         {
             _move.x = Input.GetAxis("Horizontal");
+
             if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+            {
                 jumpState = JumpState.PrepareToJump;
+            }
             else if (Input.GetButtonUp("Jump"))
             {
                 _stopJump = true;
@@ -48,6 +51,7 @@ public class PlayerController : KinematicObject
         {
             _move.x = 0;
         }
+
         UpdateJumpState();
         base.Update();
     }

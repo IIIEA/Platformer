@@ -120,8 +120,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1.15}
+  m_Offset: {x: 0.008050144, y: -0.14890099}
+  m_Size: {x: 0.6940993, y: 0.8521979}
   m_Direction: 0
 --- !u!95 &4306565588221006858
 Animator:
@@ -155,11 +155,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minGroundNormalY: 0.65
-  gravityModifier: 1
+  gravityModifier: 5
   velocity: {x: 0, y: 0}
-  _maxSpeed: 5
-  _jumpTakeOffSpeed: 6
-  _jumpModifier: 1.5
-  _jumpDeceleration: 0.5
+  _maxSpeed: 7
+  _jumpTakeOffSpeed: 1
+  _jumpModifier: 8
+  _jumpDeceleration: 0.8
   jumpState: 0
   controlEnabled: 1
