@@ -9,12 +9,11 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private PatrolPath _path;
+    [SerializeField] private Vector2 _move;
 
     private PatrolPath.Mover _mover;
     private AnimationController _control;
     private Collider2D _collider;
-
-    [SerializeField] private Vector2 _move;
 
     public Vector2 Move => _move;
 
