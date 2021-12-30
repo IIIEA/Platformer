@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class KinematicObject : MonoBehaviour
 {
-    [SerializeField] private float minGroundNormalY = .65f;
-    [SerializeField] private float gravityModifier = 1f;
+    [SerializeField] private float _minGroundNormalY = .65f;
+    [SerializeField] private float _gravityModifier = 1f;
 
     [SerializeField] protected Vector2 _velocity;
 
@@ -17,8 +17,8 @@ public class KinematicObject : MonoBehaviour
     private RaycastHit2D[] _hitBuffer = new RaycastHit2D[16];
     private List<RaycastHit2D> _hitBufferList = new List<RaycastHit2D>(16);
 
-    protected const float minMoveDistance = 0.001f;
-    protected const float shellRadius = 0.01f;
+    private const float _minMoveDistance = 0.001f;
+    private const float _shellRadius = 0.01f;
     public bool IsGrounded { get; private set; }
 
     protected virtual void OnEnable()
@@ -53,7 +53,7 @@ public class KinematicObject : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         if (_velocity.y < 0)
-            _velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
+            _velocity += _gravityModifier * Physics2D.gravity * Time.deltaTime;
         else
             _velocity += Physics2D.gravity * Time.deltaTime;
 
@@ -77,9 +77,9 @@ public class KinematicObject : MonoBehaviour
     {
         var distance = move.magnitude;
 
-        if (distance > minMoveDistance)
+        if (distance > _minMoveDistance)
         {
-            int count = _rigidBodu.Cast(move, _contactFilter, _hitBuffer, distance + shellRadius);
+            int count = _rigidBodu.Cast(move, _contactFilter, _hitBuffer, distance + _shellRadius);
 
             _hitBufferList.Clear();
 
@@ -92,7 +92,7 @@ public class KinematicObject : MonoBehaviour
             {
                 Vector2 currentNormal = _hitBufferList[i].normal;
 
-                if (currentNormal.y > minGroundNormalY)
+                if (currentNormal.y > _minGroundNormalY)
                 {
                     IsGrounded = true;
 
@@ -114,7 +114,7 @@ public class KinematicObject : MonoBehaviour
                     _velocity.y = Mathf.Min(_velocity.y, 0);
                 }
 
-                var modifiedDistance = _hitBufferList[i].distance - shellRadius;
+                var modifiedDistance = _hitBufferList[i].distance - _shellRadius;
                 distance = modifiedDistance < distance ? modifiedDistance : distance;
             }
         }

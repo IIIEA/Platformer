@@ -12,15 +12,15 @@ public class PlayerController : KinematicObject
     [SerializeField] private float _jumpModifier = 1.5f;
     [SerializeField] private float _jumpDeceleration = 0.5f;
 
-    [SerializeField] private JumpState jumpState = JumpState.Grounded;
+    [SerializeField] private JumpState _jumpState = JumpState.Grounded;
 
-    [SerializeField] private bool controlEnabled = true;
+    [SerializeField] private bool _controlEnabled = true;
 
     private bool _stopJump;
     private bool _jump;
     private Vector2 _move;
     private SpriteRenderer _spriteRenderer;
-    internal Animator _animator;
+    private Animator _animator;
 
     void Awake()
     {
@@ -30,13 +30,13 @@ public class PlayerController : KinematicObject
 
     protected override void Update()
     {
-        if (controlEnabled)
+        if (_controlEnabled)
         {
             _move.x = Input.GetAxis("Horizontal");
 
-            if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+            if (_jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
             {
-                jumpState = JumpState.PrepareToJump;
+                _jumpState = JumpState.PrepareToJump;
             }
             else if (Input.GetButtonUp("Jump"))
             {
@@ -55,27 +55,27 @@ public class PlayerController : KinematicObject
     void UpdateJumpState()
     {
         _jump = false;
-        switch (jumpState)
+        switch (_jumpState)
         {
             case JumpState.PrepareToJump:
-                jumpState = JumpState.Jumping;
+                _jumpState = JumpState.Jumping;
                 _jump = true;
                 _stopJump = false;
                 break;
             case JumpState.Jumping:
                 if (!IsGrounded)
                 {
-                    jumpState = JumpState.InFlight;
+                    _jumpState = JumpState.InFlight;
                 }
                 break;
             case JumpState.InFlight:
                 if (IsGrounded)
                 {
-                    jumpState = JumpState.Landed;
+                    _jumpState = JumpState.Landed;
                 }
                 break;
             case JumpState.Landed:
-                jumpState = JumpState.Grounded;
+                _jumpState = JumpState.Grounded;
                 break;
         }
     }

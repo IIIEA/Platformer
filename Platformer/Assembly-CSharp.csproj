@@ -99,6 +99,7 @@
     <Compile Include="Assets\Scripts\CoinInstance.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\SplineHelpers.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineTargetGroup.cs" />
+    <Compile Include="Assets\Scripts\CoinController.cs" />
     <Compile Include="Assets\Cinemachine\PostFX\CinemachinePostFX.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Components\CinemachinePOV.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Components\CinemachineBasicMultiChannelPerlin.cs" />
@@ -109,8 +110,10 @@
     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\CameraState.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\CinemachineCore.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\CinemachineBlend.cs" />
-    <Compile Include="Assets\Scripts\CoinController.cs" />
-    <Compile Include="Assets\Scripts\Coin.cs" />
+    <Compile Include="Assets\Scripts\EnemyController.cs" />
+    <Compile Include="Assets\Scripts\AnimationController.cs" />
+    <Compile Include="Assets\Scripts\PatrolPath.cs" />
+    <Compile Include="Assets\Scripts\PatrolPath.Mover.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Cinemachine\ReleaseNotes.txt" />
