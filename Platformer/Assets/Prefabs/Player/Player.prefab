@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8554618073280880656}
   - component: {fileID: 3268286652963640881}
   - component: {fileID: 2397517506758063525}
-  - component: {fileID: 2060974068741083780}
   - component: {fileID: 4306565588221006858}
+  - component: {fileID: 2005543779}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 3083089168873209362, guid: 3826d77b06d80124bb1ed978a50d1627, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -123,26 +123,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 1.15}
   m_Direction: 0
---- !u!114 &2060974068741083780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7890854895865650022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 984f466349b2cd14b931fc4893fe3a6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minGroundNormalY: 0.65
-  _gravityModifier: 1
-  _velocity: {x: 0, y: 0}
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  _speed: 0
-  _animator: {fileID: 4306565588221006858}
 --- !u!95 &4306565588221006858
 Animator:
   serializedVersion: 3
@@ -162,3 +142,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2005543779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7890854895865650022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c105c617c50054d8aaa1898b176056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minGroundNormalY: 0.65
+  gravityModifier: 1
+  velocity: {x: 0, y: 0}
+  _maxSpeed: 5
+  _jumpTakeOffSpeed: 6
+  _jumpModifier: 1.5
+  _jumpDeceleration: 0.5
+  jumpState: 0
+  controlEnabled: 1

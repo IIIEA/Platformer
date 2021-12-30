@@ -40,19 +40,6 @@ public class PhysicsMovement : MonoBehaviour
     {
         targetVelocity = new Vector2(Input.GetAxis("Horizontal"), 0);
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            _animator.SetBool("isRun", true);
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            _animator.SetBool("isRun", true);
-        }
-        else
-        {
-            _animator.SetBool("isRun", false);
-        }
-
         if (Input.GetKey(KeyCode.Space) && grounded)
             _velocity.y = 5;
     }

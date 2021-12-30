@@ -178,6 +178,10 @@ GameObject:
   - component: {fileID: 369370202}
   - component: {fileID: 369370204}
   - component: {fileID: 369370203}
+  - component: {fileID: 369370207}
+  - component: {fileID: 369370206}
+  - component: {fileID: 369370205}
+  - component: {fileID: 369370208}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -729,6 +733,134 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!66 &369370205
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369370201}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths:
+  - m_Collider: {fileID: 369370207}
+    m_ColliderPaths:
+    - - X: -70000000
+        Y: 40000000
+      - X: -80000000
+        Y: 40000000
+      - X: -80000000
+        Y: -120000000
+      - X: -70000000
+        Y: -120000000
+    - - X: -120000000
+        Y: 40000000
+      - X: -130000000
+        Y: 40000000
+      - X: -130000000
+        Y: -120000000
+      - X: -120000000
+        Y: -120000000
+    - - X: -10000000
+        Y: -40000000
+      - X: -30000000
+        Y: -40000000
+      - X: -30000000
+        Y: -50000000
+      - X: -10000000
+        Y: -50000000
+    - - X: -230000000
+        Y: -80000000
+      - X: -260000000
+        Y: -80000000
+      - X: -260000000
+        Y: -100000000
+      - X: -230000000
+        Y: -100000000
+  m_CompositePaths:
+    m_Paths:
+    - - {x: -7.0000296, y: -12}
+      - {x: -7.0000296, y: 4}
+      - {x: -8, y: 3.999971}
+      - {x: -7.9999704, y: -12}
+    - - {x: -12.00003, y: -12}
+      - {x: -12.00003, y: 4}
+      - {x: -13, y: 3.999971}
+      - {x: -12.99997, y: -12}
+    - - {x: -1.0000293, y: -5}
+      - {x: -1.0000293, y: -4}
+      - {x: -3, y: -4.000029}
+      - {x: -2.999971, y: -5}
+    - - {x: -23.000029, y: -10}
+      - {x: -23.000029, y: -8}
+      - {x: -26, y: -8.00003}
+      - {x: -25.999971, y: -10}
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005
+--- !u!50 &369370206
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369370201}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!19719996 &369370207
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369370201}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 1
+  m_UsedByComposite: 1
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
+--- !u!253 &369370208
+BuoyancyEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369370201}
+  m_Enabled: 1
+  m_UseColliderMask: 0
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_SurfaceLevel: 0
+  m_Density: 15
+  m_LinearDrag: 5
+  m_AngularDrag: 5
+  m_FlowAngle: 0
+  m_FlowMagnitude: 0
+  m_FlowVariation: 0
 --- !u!1 &461291149
 GameObject:
   m_ObjectHideFlags: 0
@@ -20353,36 +20485,8 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2060974068741083780, guid: 7dad1d55c6be4774a919d1b513554480, type: 3}
-      propertyPath: _speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2060974068741083780, guid: 7dad1d55c6be4774a919d1b513554480, type: 3}
-      propertyPath: _gravityModifier
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2060974068741083780, guid: 7dad1d55c6be4774a919d1b513554480, type: 3}
-      propertyPath: _layerMask.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4306565588221006858, guid: 7dad1d55c6be4774a919d1b513554480, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 7676b2cb9d693864b9a4a149da7dfcd8, type: 2}
     - target: {fileID: 5403408447338596260, guid: 7dad1d55c6be4774a919d1b513554480, type: 3}
       propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5403408447338596260, guid: 7dad1d55c6be4774a919d1b513554480, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5403408447338596260, guid: 7dad1d55c6be4774a919d1b513554480, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5403408447338596260, guid: 7dad1d55c6be4774a919d1b513554480, type: 3}
-      propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5403408447338596260, guid: 7dad1d55c6be4774a919d1b513554480, type: 3}
@@ -20428,10 +20532,6 @@ PrefabInstance:
     - target: {fileID: 7890854895865650022, guid: 7dad1d55c6be4774a919d1b513554480, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8554618073280880656, guid: 7dad1d55c6be4774a919d1b513554480, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dad1d55c6be4774a919d1b513554480, type: 3}
