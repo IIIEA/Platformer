@@ -20,14 +20,10 @@ public class PlayerController : KinematicObject
     private bool _jump;
     private Vector2 _move;
     private SpriteRenderer _spriteRenderer;
-    private Collider2D _collider2d;
     internal Animator _animator;
-
-    public Bounds Bounds => _collider2d.bounds;
 
     void Awake()
     {
-        _collider2d = GetComponent<Collider2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
     }
@@ -88,15 +84,15 @@ public class PlayerController : KinematicObject
     {
         if (_jump && IsGrounded)
         {
-            velocity.y = _jumpTakeOffSpeed * _jumpModifier;
+            _velocity.y = _jumpTakeOffSpeed * _jumpModifier;
             _jump = false;
         }
         else if (_stopJump)
         {
             _stopJump = false;
-            if (velocity.y > 0)
+            if (_velocity.y > 0)
             {
-                velocity.y = velocity.y * _jumpDeceleration;
+                _velocity.y = _velocity.y * _jumpDeceleration;
             }
         }
 
@@ -106,9 +102,9 @@ public class PlayerController : KinematicObject
             _spriteRenderer.flipX = false;
 
         _animator.SetBool("grounded", IsGrounded);
-        _animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / _maxSpeed);
+        _animator.SetFloat("velocityX", Mathf.Abs(_velocity.x) / _maxSpeed);
 
-        targetVelocity = _move * _maxSpeed;
+        _targetVelocity = _move * _maxSpeed;
     }
 
     public enum JumpState

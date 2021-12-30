@@ -4,63 +4,44 @@ using UnityEngine;
 
 public class KinematicObject : MonoBehaviour
 {
-    public float minGroundNormalY = .65f;
+    [SerializeField] private float minGroundNormalY = .65f;
+    [SerializeField] private float gravityModifier = 1f;
 
-    public float gravityModifier = 1f;
+    [SerializeField] protected Vector2 _velocity;
 
-    public Vector2 velocity;
+    protected Vector2 _targetVelocity;
 
-    public bool IsGrounded { get; private set; }
-
-    protected Vector2 targetVelocity;
-    protected Vector2 groundNormal;
-    protected Rigidbody2D body;
-    protected ContactFilter2D contactFilter;
-    protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
-    protected List<RaycastHit2D> hitBufferList = new List<RaycastHit2D>(16);
+    private Vector2 _groundNormal;
+    private Rigidbody2D _rigidBodu;
+    private ContactFilter2D _contactFilter;
+    private RaycastHit2D[] _hitBuffer = new RaycastHit2D[16];
+    private List<RaycastHit2D> _hitBufferList = new List<RaycastHit2D>(16);
 
     protected const float minMoveDistance = 0.001f;
     protected const float shellRadius = 0.01f;
-
-    public void Bounce(float value)
-    {
-        velocity.y = value;
-    }
-
-    public void Bounce(Vector2 dir)
-    {
-        velocity.y = dir.y;
-        velocity.x = dir.x;
-    }
-
-    public void Teleport(Vector3 position)
-    {
-        body.position = position;
-        velocity *= 0;
-        body.velocity *= 0;
-    }
+    public bool IsGrounded { get; private set; }
 
     protected virtual void OnEnable()
     {
-        body = GetComponent<Rigidbody2D>();
-        body.isKinematic = true;
+        _rigidBodu = GetComponent<Rigidbody2D>();
+        _rigidBodu.isKinematic = true;
     }
 
     protected virtual void OnDisable()
     {
-        body.isKinematic = false;
+        _rigidBodu.isKinematic = false;
     }
 
     protected virtual void Start()
     {
-        contactFilter.useTriggers = false;
-        contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
-        contactFilter.useLayerMask = true;
+        _contactFilter.useTriggers = false;
+        _contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
+        _contactFilter.useLayerMask = true;
     }
 
     protected virtual void Update()
     {
-        targetVelocity = Vector2.zero;
+        _targetVelocity = Vector2.zero;
         ComputeVelocity();
     }
 
@@ -71,17 +52,17 @@ public class KinematicObject : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if (velocity.y < 0)
-            velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
+        if (_velocity.y < 0)
+            _velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
         else
-            velocity += Physics2D.gravity * Time.deltaTime;
+            _velocity += Physics2D.gravity * Time.deltaTime;
 
-        velocity.x = targetVelocity.x;
+        _velocity.x = _targetVelocity.x;
 
         IsGrounded = false;
 
-        Vector2 deltaPosition = velocity * Time.deltaTime;
-        Vector2 moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
+        Vector2 deltaPosition = _velocity * Time.deltaTime;
+        Vector2 moveAlongGround = new Vector2(_groundNormal.y, -_groundNormal.x);
         Vector2 move = moveAlongGround * deltaPosition.x;
 
         Movement(move, false);
@@ -92,24 +73,24 @@ public class KinematicObject : MonoBehaviour
 
     }
 
-    void Movement(Vector2 move, bool yMovement)
+    private void Movement(Vector2 move, bool yMovement)
     {
         var distance = move.magnitude;
 
         if (distance > minMoveDistance)
         {
-            int count = body.Cast(move, contactFilter, hitBuffer, distance + shellRadius);
+            int count = _rigidBodu.Cast(move, _contactFilter, _hitBuffer, distance + shellRadius);
 
-            hitBufferList.Clear();
+            _hitBufferList.Clear();
 
             for (int i = 0; i < count; i++)
             {
-                hitBufferList.Add(hitBuffer[i]);
+                _hitBufferList.Add(_hitBuffer[i]);
             }
 
-            for (int i = 0; i < hitBufferList.Count; i++)
+            for (int i = 0; i < _hitBufferList.Count; i++)
             {
-                Vector2 currentNormal = hitBufferList[i].normal;
+                Vector2 currentNormal = _hitBufferList[i].normal;
 
                 if (currentNormal.y > minGroundNormalY)
                 {
@@ -117,27 +98,27 @@ public class KinematicObject : MonoBehaviour
 
                     if (yMovement)
                     {
-                        groundNormal = currentNormal;
+                        _groundNormal = currentNormal;
                         currentNormal.x = 0;
                     }
                 }
 
-                float projection = Vector2.Dot(velocity, currentNormal);
+                float projection = Vector2.Dot(_velocity, currentNormal);
                 if (projection < 0)
                 {
-                    velocity = velocity - projection * currentNormal;
+                    _velocity = _velocity - projection * currentNormal;
                 }
                 else
                 {
-                    velocity.x *= 0;
-                    velocity.y = Mathf.Min(velocity.y, 0);
+                    _velocity.x *= 0;
+                    _velocity.y = Mathf.Min(_velocity.y, 0);
                 }
 
-                var modifiedDistance = hitBufferList[i].distance - shellRadius;
+                var modifiedDistance = _hitBufferList[i].distance - shellRadius;
                 distance = modifiedDistance < distance ? modifiedDistance : distance;
             }
         }
-        body.position = body.position + move.normalized * distance;
+        _rigidBodu.position = _rigidBodu.position + move.normalized * distance;
     }
 
 }
