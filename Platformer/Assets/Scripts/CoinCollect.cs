@@ -4,33 +4,28 @@ using UnityEngine;
 
 public class CoinCollect : MonoBehaviour
 {
-    [SerializeField] private CoinInstance[] _coins;
+    [SerializeField] private Coin[] _coins;
 
     private void Awake()
     {
-        if (_coins.Length == 0)
-            FindAllCoinsInScene();
+        _coins = GetComponentsInChildren<Coin>();
     }
 
-    private void Update()
+    public void ToCollect()
     {
         for (int i = 0; i < _coins.Length; i++)
         {
-            CoinInstance _coin = _coins[i];
+            Coin coin = _coins[i];
 
-            if (_coin != null)
+            if (coin != null)
             {
-                if (_coin.Collected)
+                if (coin.IsCollected)
                 {
-                    _coin.gameObject.SetActive(false);
+                    coin.gameObject.SetActive(false);
                     _coins[i] = null;
                 }
             }
         }
-    }
-    private void FindAllCoinsInScene()
-    {
-        _coins = GetComponentsInChildren<CoinInstance>();
     }
 }
 

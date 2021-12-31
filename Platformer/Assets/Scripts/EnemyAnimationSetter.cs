@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer), typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer), typeof(Animator), typeof(EnemyMovement))]
 public class EnemyAnimationSetter : PhysicsMovement
 {
     [SerializeField] private float _maxSpeed = 7;
