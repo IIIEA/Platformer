@@ -7,9 +7,17 @@ public partial class PatrolPath
     public class Mover
     {
         private PatrolPath _path;
-        private float p = 0;
+        private float _interpolantValue = 0;
         private float _duration;
         private float _startTime;
+        public Vector2 Position
+        {
+            get
+            {
+                _interpolantValue = Mathf.InverseLerp(0, _duration, Mathf.PingPong(Time.time - _startTime, _duration));
+                return _path.transform.TransformPoint(Vector2.Lerp(_path.startPosition, _path.endPosition, _interpolantValue));
+            }
+        }
 
         public Mover(PatrolPath path, float speed)
         {
@@ -18,13 +26,5 @@ public partial class PatrolPath
             _startTime = Time.time;
         }
 
-        public Vector2 Position
-        {
-            get
-            {
-                p = Mathf.InverseLerp(0, _duration, Mathf.PingPong(Time.time - _startTime, _duration));
-                return _path.transform.TransformPoint(Vector2.Lerp(_path.startPosition, _path.endPosition, p));
-            }
-        }
     }
 }

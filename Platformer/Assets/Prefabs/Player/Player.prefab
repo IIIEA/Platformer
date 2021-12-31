@@ -151,15 +151,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7890854895865650022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46c105c617c50054d8aaa1898b176056, type: 3}
+  m_Script: {fileID: 11500000, guid: 77aef9c32e9f7db4482cb13f47d878db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minGroundNormalY: 0.65
-  gravityModifier: 5
-  velocity: {x: 0, y: 0}
-  _maxSpeed: 7
-  _jumpTakeOffSpeed: 1
-  _jumpModifier: 8
-  _jumpDeceleration: 0.8
-  jumpState: 0
-  controlEnabled: 1
+  _minGroundNormalY: 0.65
+  _gravityModifier: 1
+  _velocity: {x: 0, y: 0}
+  _maxSpeed: 5
+  _jumpTakeOffSpeed: 6
+  _jumpModifier: 1.5
+  _jumpDeceleration: 0.5
+  _controlEnabled: 1
+  _jumpState: 0

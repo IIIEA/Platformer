@@ -5,18 +5,18 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class CoinInstance : MonoBehaviour
 {
-    private CoinController _controller;
+    private CoinCollect _coinCollect;
 
     public bool Collected { get; private set; }
 
     private void Awake()
     {
-        _controller = GetComponentInParent<CoinController>();
+        _coinCollect = GetComponentInParent<CoinCollect>();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.TryGetComponent<PlayerController>(out PlayerController playerController))
+        if (collider.gameObject.TryGetComponent<PlayerMovement>(out PlayerMovement playerController))
         {
             var player = playerController;
 
@@ -27,11 +27,11 @@ public class CoinInstance : MonoBehaviour
         }
     }
 
-    private void OnPlayerEnter(PlayerController player)
+    private void OnPlayerEnter(PlayerMovement player)
     {
         if (Collected) return;
 
-        if (_controller != null)
+        if (_coinCollect != null)
             Collected = true;
     }
 }
