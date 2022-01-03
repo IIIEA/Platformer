@@ -11,6 +11,7 @@ public class EnemyAnimationSetter : PhysicsMovement
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
 
+    private const string velosityX = nameof(velosityX);
     public float MaxSpeed => _maxSpeed;
 
     protected virtual void Awake()
@@ -27,7 +28,7 @@ public class EnemyAnimationSetter : PhysicsMovement
         else if (_enemy.Move.x < -0.01f)
             _spriteRenderer.flipX = false;
 
-        _animator.SetFloat("velocityX", Mathf.Abs(_velocity.x) / _maxSpeed);
+        _animator.SetFloat(velosityX, Mathf.Abs(_velocity.x) / _maxSpeed);
 
         TargetVelocity = _enemy.Move * _maxSpeed;
     }

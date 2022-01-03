@@ -16,7 +16,7 @@ public class PlayerMovement : PhysicsMovement
 
     private bool _stopJump;
     private bool _jump;
-    private Vector2 _move;
+    private Vector2 _speed;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
 
@@ -30,7 +30,7 @@ public class PlayerMovement : PhysicsMovement
     {
         if (_controlEnabled)
         {
-            _move.x = Input.GetAxis("Horizontal");
+            _speed.x = Input.GetAxis("Horizontal");
 
             if (_jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
             {
@@ -43,7 +43,7 @@ public class PlayerMovement : PhysicsMovement
         }
         else
         {
-            _move.x = 0;
+            _speed.x = 0;
         }
 
         UpdateJumpState();
@@ -94,15 +94,15 @@ public class PlayerMovement : PhysicsMovement
             }
         }
 
-        if (_move.x > 0.01f)
+        if (_speed.x > 0.01f)
             _spriteRenderer.flipX = true;
-        else if (_move.x < -0.01f)
+        else if (_speed.x < -0.01f)
             _spriteRenderer.flipX = false;
 
         _animator.SetBool(AnimationState.grounded.ToString(), IsGrounded);
         _animator.SetFloat(AnimationState.velocityX.ToString(), Mathf.Abs(_velocity.x) / _maxSpeed);
 
-        TargetVelocity = _move * _maxSpeed;
+        TargetVelocity = _speed * _maxSpeed;
     }
 
     private enum JumpState
