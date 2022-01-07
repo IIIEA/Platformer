@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PhysicsMovement : MonoBehaviour
 {
     [SerializeField] private float _minGroundNormalY = .65f;
@@ -15,8 +16,8 @@ public class PhysicsMovement : MonoBehaviour
     private RaycastHit2D[] _hitBuffer = new RaycastHit2D[16];
     private List<RaycastHit2D> _hitBufferList = new List<RaycastHit2D>(16);
 
-    private const float _minMoveDistance = 0.001f;
-    private const float _shellRadius = 0.01f;
+    private const float MinMoveDistance = 0.001f;
+    private const float ShellRadius = 0.01f;
 
     protected Vector2 TargetVelocity;
     public bool IsGrounded => _isGrounded;
@@ -66,9 +67,9 @@ public class PhysicsMovement : MonoBehaviour
     {
         var distance = move.magnitude;
 
-        if (distance > _minMoveDistance)
+        if (distance > MinMoveDistance)
         {
-            int count = _rigidBody.Cast(move, _contactFilter, _hitBuffer, distance + _shellRadius);
+            int count = _rigidBody.Cast(move, _contactFilter, _hitBuffer, distance + ShellRadius);
 
             _hitBufferList.Clear();
 
@@ -103,7 +104,7 @@ public class PhysicsMovement : MonoBehaviour
                     _velocity.y = Mathf.Min(_velocity.y, 0);
                 }
 
-                var modifiedDistance = _hitBufferList[i].distance - _shellRadius;
+                var modifiedDistance = _hitBufferList[i].distance - ShellRadius;
                 distance = modifiedDistance < distance ? modifiedDistance : distance;
             }
         }

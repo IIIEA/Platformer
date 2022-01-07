@@ -20,6 +20,9 @@ public class PlayerMovement : PhysicsMovement
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
 
+    private const string velocityX = nameof(velocityX);
+    private const string grounded = nameof(grounded);
+
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -99,8 +102,10 @@ public class PlayerMovement : PhysicsMovement
         else if (_speed.x < -0.01f)
             _spriteRenderer.flipX = false;
 
-        _animator.SetBool(AnimationState.grounded.ToString(), IsGrounded);
-        _animator.SetFloat(AnimationState.velocityX.ToString(), Mathf.Abs(_velocity.x) / _maxSpeed);
+        _animator.SetBool(grounded.ToString(), IsGrounded);
+
+        if (_maxSpeed != 0)
+            _animator.SetFloat(velocityX.ToString(), Mathf.Abs(_velocity.x) / _maxSpeed);
 
         TargetVelocity = _speed * _maxSpeed;
     }
@@ -112,11 +117,5 @@ public class PlayerMovement : PhysicsMovement
         Jumping,
         InFlight,
         Landed
-    }
-
-    private enum AnimationState
-    {
-        grounded,
-        velocityX
     }
 }

@@ -10,6 +10,7 @@ public partial class PatrolPath
         private float _interpolantValue = 0;
         private float _duration;
         private float _startTime;
+
         public Vector2 Position
         {
             get
