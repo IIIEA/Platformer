@@ -72,7 +72,7 @@
     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\LensSettings.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineConfiner.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Components\CinemachineSameAsFollowObject.cs" />
-    <Compile Include="Assets\Scripts\EnemyAnimationSetter.cs" />
+    <Compile Include="Assets\Scripts\EnemyAnimator.cs" />
     <Compile Include="Assets\Scripts\PatrolPath.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineVirtualCamera.cs" />
     <Compile Include="Assets\Scripts\PatrolPath.Mover.cs" />
@@ -93,7 +93,7 @@
     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\NoiseSettings.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineMixer.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\Canvas\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Components\CinemachineTransposer.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\Predictor.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineShot.cs" />

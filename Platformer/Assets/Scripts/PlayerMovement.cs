@@ -20,8 +20,10 @@ public class PlayerMovement : PhysicsMovement
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
 
-    private const string velocityX = nameof(velocityX);
-    private const string grounded = nameof(grounded);
+    private const string VelocityX = nameof(VelocityX);
+    private const string Grounded = nameof(Grounded);
+    private const string Horizontal = nameof(Horizontal);
+    private const string Jump = nameof(Jump);
 
     private void Awake()
     {
@@ -33,13 +35,13 @@ public class PlayerMovement : PhysicsMovement
     {
         if (_controlEnabled)
         {
-            _speed.x = Input.GetAxis("Horizontal");
+            _speed.x = Input.GetAxis(Horizontal);
 
-            if (_jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+            if (_jumpState == JumpState.Grounded && Input.GetButtonDown(Jump))
             {
                 _jumpState = JumpState.PrepareToJump;
             }
-            else if (Input.GetButtonUp("Jump"))
+            else if (Input.GetButtonUp(Jump))
             {
                 _stopJump = true;
             }
@@ -53,7 +55,7 @@ public class PlayerMovement : PhysicsMovement
         ComputeTargetVelocity();
     }
 
-    void UpdateJumpState()
+    private void UpdateJumpState()
     {
         _jump = false;
         switch (_jumpState)
@@ -102,10 +104,10 @@ public class PlayerMovement : PhysicsMovement
         else if (_speed.x < -0.01f)
             _spriteRenderer.flipX = false;
 
-        _animator.SetBool(grounded.ToString(), IsGrounded);
+        _animator.SetBool(Grounded.ToString(), IsGrounded);
 
         if (_maxSpeed != 0)
-            _animator.SetFloat(velocityX.ToString(), Mathf.Abs(_velocity.x) / _maxSpeed);
+            _animator.SetFloat(VelocityX.ToString(), Mathf.Abs(_velocity.x) / _maxSpeed);
 
         TargetVelocity = _speed * _maxSpeed;
     }
